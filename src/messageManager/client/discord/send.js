@@ -21,7 +21,9 @@ const send = (message, database, channelId , discord) => {
                     iconURL: discord.user.displayAvatarURL()
                 })
         ]
-    })
+    }).catch((error) => {
+        console.log(`Unable to Send Message to Channel [${channelId}]`);
+    });
 }
 
 module.exports = send;
