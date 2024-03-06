@@ -1,8 +1,9 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('setup')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
         .addChannelOption((o) => o
             .setName("channel")
             .setDescription("Channel to Chat with Xantic")
