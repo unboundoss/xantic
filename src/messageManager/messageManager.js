@@ -10,11 +10,11 @@ const initMessageManager = async (
     database,
     discord
 ) => {
-    function postMessage(message){
+    function postMessage(message, uuid){
         database.list("xan.guilds" , {} , (list) => {
            for(var element of list){
 
-            if(element.client == "discord") discordSend(message , data , element.channelId , discord);
+            if(element.client == "discord") discordSend(message , database , element.channelId ,uuid , discord);
            } 
         });
     }
@@ -36,9 +36,9 @@ const initMessageManager = async (
                 _message.serverName = message.guild.name,
                 _message.message = message.content;
 
-                delete _message.uuid;
-
-                postMessage(_message.toArray());
+                database.insert("xan.messages" , _message.toArray() , (uuid) => {
+                    postMessage(_message.toArray(), uuid);
+                });
             }
         });
     });

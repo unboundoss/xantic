@@ -1,7 +1,6 @@
 class Message {
     /**
      * @typedef {Object} MessageFields
-     * @property {import('crypto').UUID} uuid
      * @property {import('discord.js').Snowflake} serverId
      * @property {string|null} serverName
      * @property {import('discord.js').Snowflake} authorId
@@ -10,7 +9,6 @@ class Message {
      */
 
     constructor(){
-        this.uuid = require('crypto').randomUUID();
         this.serverId = 1;
         this.serverName = "[No Server]";
         this.authorId = 1;
@@ -36,7 +34,6 @@ class Message {
 
     toArray(){
         return {
-            uuid : this.uuid,
             serverId : this.serverId,
             serverName : this.serverName,
             authorId : this.authorId,

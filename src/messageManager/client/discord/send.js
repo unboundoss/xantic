@@ -7,7 +7,7 @@ const { EmbedBuilder } = require("@discordjs/builders");
  * @param {Message} message
  * @param {Client} discord 
  */
-const send = (message, database, channelId , discord) => {
+const send = (message, database, channelId , uuid , discord) => {
     discord.channels.cache?.get(channelId).send({
         embeds: [
             new EmbedBuilder()
@@ -23,6 +23,13 @@ const send = (message, database, channelId , discord) => {
         ]
     }).catch((error) => {
         console.log(`Unable to Send Message to Channel [${channelId}]`);
+    }).then((_message) => {
+        database.insert("xan.messageDelivery" ,{
+            channelId: channelId,
+            messageId : _message.id,
+            client: "discord",
+            link: uuid
+        }, (uuid) => {});
     });
 }
 
