@@ -4,7 +4,8 @@
   "description": "ConnectX Xantic",
   "main": "index.js",
   "scripts": {
-    "test": "node index"
+    "test": "nodemon src/index",
+    "start": "node src/index"
   },
   "keywords": [
     "cx",
@@ -14,6 +15,7 @@
   "license": "AGPLv3",
   "dependencies": {
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.0"
   }
 }

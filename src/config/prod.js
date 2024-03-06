@@ -3,5 +3,7 @@ module.exports = {
     // Discord Bot Token **It's not recommend to put it here**,
     discord_token: process.env['discord_token'] || "",
     // Discord Bot Client Id **It's not recommend to put it here**,
-    discord_client_id: process.env['discord_client_id'] || ""
+    discord_client_id: process.env['discord_client_id'] || "",
+    // Discord Bot Client Id **It's not recommend to put it here**,
+    discord_client_secret: process.env['discord_client_secret'] || ""
 }
