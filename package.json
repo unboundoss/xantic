@@ -1,5 +1,5 @@
 {
-  "name": "cx-oss",
+  "name": "xantic",
   "version": "0.0.1",
   "description": "ConnectX Xantic",
   "main": "src/index.js",
@@ -11,7 +11,7 @@
     "cx",
     "multiserver"
   ],
-  "author": "Unbound",
+  "author": "Unbound LLC",
   "license": "AGPLv3",
   "dependencies": {
     "discord.js": "^14.14.1",
