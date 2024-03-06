@@ -3,6 +3,6 @@
     "xan.userBans",
     "xan.serverBans",
     "xan.messages",
-    "xan.networkds",
+    "xan.networks",
     "xan.server_prefs"
 ]
