@@ -15,8 +15,19 @@ module.exports = {
 	async execute(interaction) {
         var channel = interaction.options.getChannel("channel");
 
-        console.log(channel);
-
-		await interaction.reply('Pong!');
+        interaction.client.database.search("xan.guilds" , {
+            serverId : interaction.guild.id
+        } , async (data) => {
+            if(data == null){
+                interaction.client.database.insert("xan.guilds" , {
+                    serverId : interaction.guild.id,
+                    channelId : channel.id
+                }, async (c) => {
+                    await interaction.reply(`Saved Channel as #${channel.name} in Database`);
+                })
+            }else{
+                await interaction.reply(`Guild is already saved into Database`);
+            }
+        });
 	},
 };
