@@ -26,6 +26,9 @@ const initMessageManager = async (
             serverId : message.guild.id
         } , async (data) => {
             if(data !== null){
+
+                message.delete().catch((error) => {});
+
                 var _message = new Message();
                 _message.authorId = message.author.id;
                 _message.authorName = message.author.username;
