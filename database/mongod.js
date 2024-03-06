@@ -17,6 +17,14 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
             })
         },
 
+        list: async (table , callback) => {
+            var collection = db.collection(table);
+
+            var data = await collection.find(data);
+
+            callback(data);
+        },
+
         insert: async (table, data,callback) => {
             var uuid = require('node:crypto').randomUUID();
 
