@@ -1,0 +1,19 @@
+{
+  "name": "cx-oss",
+  "version": "0.0.1",
+  "description": "ConnectX Xantic",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "keywords": [
+    "cx",
+    "multiserver"
+  ],
+  "author": "Unbound",
+  "license": "AGPLv3",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
+  }
+}
