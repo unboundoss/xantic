@@ -3,6 +3,7 @@ require("dotenv").config();
 const config = require("./config/prod");
 const fs = require('node:fs');
 const path = require('node:path');
+const { MongoClient } = require("mongodb");
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 
 const client = new Client({ intents: [
@@ -12,14 +13,33 @@ const client = new Client({ intents: [
     GatewayIntentBits.MessageContent
 ] });
 
+async function main(){
+	if(config.database_adapter == "mongod"){
+		const mongo_client = new MongoClient(config.database_uri);
+
+		await mongo_client.connect();
+		console.log("Using MongoDB Connection for Database");
+
+		require("../database/mongod").initMongoDBInstance(mongo_client, config , (back) => initMessageManager(back));
+	}else if(config.database_adapter == "mysqld"){
+	
+	}
+}
+
+async function initMessageManager(database){
+	database.build();
+}
+
 client.commands = new Collection();
 
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 
+	main();
+
     client.user.setActivity({
-        name: `crossMessage on ${client.guilds.cache.size.toString()}`,
-        state: "idle"
+        name: `Minecraft`,
+        state: "2.0"
     });
 });
 
