@@ -20,9 +20,9 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
         list: async (table , callback) => {
             var collection = db.collection(table);
 
-            var data = await collection.find(data);
+            var found_data = await collection.find(data);
 
-            callback(data);
+            callback(found_data);
         },
 
         insert: async (table, data,callback) => {
@@ -49,9 +49,9 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
         search: async (table, data , callback) => {
             var collection = db.collection(table);
 
-            var data = await collection.findOne(data);
+            var found_data = await collection.findOne(data);
 
-            callback(data);
+            callback(found_data);
         },
 
         edit: async (table, uuid, data , callback) => {

@@ -4,6 +4,7 @@ const config = require("./config/prod");
 const fs = require('node:fs');
 const path = require('node:path');
 const { MongoClient } = require("mongodb");
+const mysql = require('mysql2');
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 
 const client = new Client({
@@ -24,7 +25,17 @@ async function main() {
 
 		require("../database/mongod").initMongoDBInstance(mongo_client, config, (back) => initMessageManager(back));
 	} else if (config.database_adapter == "mysqld") {
+		const mysql_connection = mysql.createConnection({
+			host: config.database_host,
+			user: config.database_user,
+			password: config.database_password,
+			database: config.database_name,
+		});
 
+		mysql_connection.connect();
+		mysql_connection.on('error', (error) => console.error);
+
+		require("../database/mysqld").initMYSQL2Connection(mysql_connection, config, (back) => initMessageManager(back));
 	}
 }
 

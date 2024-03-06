@@ -9,12 +9,13 @@ module.exports = {
 
     // Database Configurations
     // Possible Options ["mongod" , "mysqld"]
-    database_adapter: "mongod",
+    database_adapter: "mysqld",
     // If using MongoDB
     database_uri: process.env['database_uri'] || "",
     database_name: "xantic",
     // If using MySQL
     database_host: "localhost",
     database_user: "root",
-    datbase_password: process.env['database_password'] || ""
+    database_password: process.env['database_password'] || "",
+    database_engine: "InnoDB"
 }
