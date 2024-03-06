@@ -13,12 +13,13 @@ const send = (message, database, channelId , uuid , discord) => {
             new EmbedBuilder()
                 .setAuthor({
                     name: message.authorName,
-                    iconURL: discord.user.displayAvatarURL()
+                    iconURL: message.authorIcon || discord.user.displayAvatarURL()
                 })
                 .setDescription(message.message)
+                .setTimestamp()
                 .setFooter({
                     text: message.serverName,
-                    iconURL: discord.user.displayAvatarURL()
+                    iconURL: message.serverIcon || discord.user.displayAvatarURL()
                 })
         ]
     }).catch((error) => {

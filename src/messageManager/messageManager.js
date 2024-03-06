@@ -32,8 +32,10 @@ const initMessageManager = async (
                 var _message = new Message();
                 _message.authorId = message.author.id;
                 _message.authorName = message.author.username;
+                _message.authorIcon = message.author.displayAvatarURL();
                 _message.serverId = message.guild.id;
                 _message.serverName = message.guild.name,
+                _message.serverIcon = message.guild.iconURL();
                 _message.message = message.content;
 
                 database.insert("xan.messages" , _message.toArray() , (uuid) => {

@@ -3,16 +3,20 @@ class Message {
      * @typedef {Object} MessageFields
      * @property {import('discord.js').Snowflake} serverId
      * @property {string|null} serverName
+     * @property {import('url').Url|null} serverIcon
      * @property {import('discord.js').Snowflake} authorId
      * @property {string|null} authorName
+     * @property {import('url').Url|null} authorIcon
      * @property {string|null} message
      */
 
     constructor(){
         this.serverId = 1;
         this.serverName = "[No Server]";
+        this.serverIcon = null;
         this.authorId = 1;
         this.authorName = "[No Author]";
+        this.authorIcon = null;
         this.message = "[No Message]";
     }
 
@@ -36,7 +40,9 @@ class Message {
         return {
             serverId : this.serverId,
             serverName : this.serverName,
+            serverIcon : this.serverIcon,
             authorId : this.authorId,
+            authorIcon: this.authorIcon,
             authorName: this.authorName,
             message: this.message
         };
