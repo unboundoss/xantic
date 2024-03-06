@@ -17,10 +17,10 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
             })
         },
 
-        list: async (table , callback) => {
+        list: async (table , data, callback) => {
             var collection = db.collection(table);
 
-            var found_data = await collection.find(data);
+            var found_data = await collection.find(data).toArray();
 
             callback(found_data);
         },

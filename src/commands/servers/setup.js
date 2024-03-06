@@ -22,9 +22,10 @@ module.exports = {
             if(data == null){
                 interaction.client.database.insert("xan.guilds" , {
                     serverId : interaction.guild.id,
-                    channelId : channel.id
+                    channelId : channel.id,
+                    client: "discord"
                 }, async (c) => {
-                    await interaction.reply(`Saved Channel as #${channel.name} in Database`);
+                    await interaction.reply(`Saved Channel as #${channel.name} in Database as Discord Client`);
                 })
             }else{
                 await interaction.reply(`Guild is already saved into Database`);

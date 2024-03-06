@@ -43,6 +43,8 @@ async function initMessageManager(database) {
 	client.database = database;
 	
 	database.build();
+
+	require("./messageManager/messageManager")(database , client);
 }
 
 client.commands = new Collection();
