@@ -9,7 +9,7 @@ module.exports = {
 
     // Database Configurations
     // Possible Options ["mongod" , "mysqld"]
-    database_adapter: "mysqld",
+    database_adapter: "mongod",
     // If using MongoDB
     database_uri: process.env['database_uri'] || "",
     database_name: "xantic",
