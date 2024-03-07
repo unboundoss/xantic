@@ -1,4 +1,4 @@
-const { Client } = require("discord.js");
+const { Client, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const Message = require("../../Message");
 const { EmbedBuilder } = require("@discordjs/builders");
 
@@ -21,13 +21,23 @@ const send = (message, database, channelId , uuid , discord) => {
                     text: message.serverName,
                     iconURL: message.serverIcon || discord.user.displayAvatarURL()
                 })
+        ],
+        components: [
+            new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("DELETE_MESSAGE")
+                        .setLabel("Delete")
+                        .setEmoji('🗑')
+                        .setStyle(ButtonStyle.Secondary)
+                )
         ]
     }).catch((error) => {
         console.log(`Unable to Send Message to Channel [${channelId}]`);
     }).then((_message) => {
         database.insert("xan.messageDelivery" ,{
-            channelId: channelId,
-            messageId : _message.id,
+            channelId: _message.channelId,
+            messageId : `${_message.id}`,
             client: "discord",
             link: uuid
         }, (uuid) => {});

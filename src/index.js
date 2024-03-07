@@ -44,6 +44,24 @@ async function initMessageManager(database) {
 	
 	database.build();
 
+	client.on(Events.InteractionCreate , (interaction) => {
+		require("./messageManager/messageActionManager")(database,client , (fun) => {
+			if(interaction.isButton()){
+				if(interaction.customId == "DELETE_MESSAGE"){
+					fun.find_uuid(interaction.message.id, interaction.member.id ,(uuid) => {
+						if(uuid == null){
+							interaction.reply({ content: "Access Denied", ephemeral: true });
+							return;
+						}
+						fun.delete(uuid);
+
+						interaction.reply({ content: "Message Deleted Successfull!", ephemeral: true });
+					});
+				}
+			}
+		});
+	});
+
 	require("./messageManager/messageManager")(database , client);
 }
 
@@ -79,6 +97,7 @@ client.once(Events.ClientReady, readyClient => {
 	}
 
 	client.on(Events.InteractionCreate, async interaction => {
+
 		if (!interaction.isChatInputCommand()) return;
 
 		const command = interaction.client.commands.get(interaction.commandName);

@@ -13,7 +13,6 @@ const initMessageManager = async (
     function postMessage(message, uuid){
         database.list("xan.guilds" , {} , (list) => {
            for(var element of list){
-
             if(element.client == "discord") discordSend(message , database , element.channelId ,uuid , discord);
            } 
         });
