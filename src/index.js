@@ -4,7 +4,7 @@ const config = require("./config/prod");
 const fs = require('node:fs');
 const path = require('node:path');
 const { MongoClient } = require("mongodb");
-const mysql = require('mysql2');
+const { Sequelize } = require("sequelize");
 const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 
 const client = new Client({
@@ -25,18 +25,30 @@ async function main() {
 
 		require("../database/mongod").initMongoDBInstance(mongo_client, config, (back) => initMessageManager(back));
 	} else if (config.database_adapter == "mysqld") {
-		const mysql_connection = mysql.createConnection({
-			host: config.database_host,
-			user: config.database_user,
-			password: config.database_password,
-			database: config.database_name,
-		});
-
-		mysql_connection.connect();
-		mysql_connection.on('error', (error) => console.error);
-
-		require("../database/mysqld").initMYSQL2Connection(mysql_connection, config, (back) => initMessageManager(back));
-	}
+		const mysql_conn = new Sequelize(config.database_name, config.database_user, config.database_password, {
+      host: config.database_host,
+      dialect: "mysql"
+    })
+    try {
+        await mysql_conn.authenticate();
+		    await require("../database/sqlz")
+          .initSQLConnection(mysql_conn, config, async (back) => await initMessageManager(back));
+	  } catch (e) {
+        console.error(`Error:\n${e}`);
+    }
+  } else if (config.database_adapter == "sqlite") {
+    const sql_conn = new Sequelize({
+      dialect: "sqlite",
+      storage: config.database_file
+    });
+    try {
+      await sql_conn.authenticate();
+      await require("../database/sqlz")
+        .initSQLConnection(sql_conn, config, async (back) => await initMessageManager(back));
+    } catch (e) {
+      console.error(`Error:\n${e}`);
+    }
+  }
 }
 
 async function initMessageManager(database) {

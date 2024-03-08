@@ -10,20 +10,20 @@ const initMessageManager = async (
     database,
     discord
 ) => {
-    function postMessage(message, uuid){
-        database.list("xan.guilds" , {} , (list) => {
-           for(var element of list){
-            if(element.client == "discord") discordSend(message , database , element.channelId ,uuid , discord);
-           } 
+    function postMessage(message, uuid) {
+        database.list("xan.guilds", {}, (list) => {
+           for (var element of list) {
+             if (element.client == "discord") discordSend(message, database, element.channelId, uuid, discord);
+           }
         });
     }
 
 
-    discord.on(Events.MessageCreate , (message) => {
+    discord.on(Events.MessageCreate, (message) => {
         if(message.author.bot) return;
-        database.search("xan.guilds" , {
+        database.search("xan.guilds", {
             serverId : message.guild.id
-        } , async (data) => {
+        }, async (data) => {
             if(data !== null){
 
                 message.delete().catch((error) => {});
@@ -37,7 +37,7 @@ const initMessageManager = async (
                 _message.serverIcon = message.guild.iconURL();
                 _message.message = message.content;
 
-                database.insert("xan.messages" , _message.toArray() , (uuid) => {
+                database.insert("xan.messages", _message.toArray(), (uuid) => {
                     postMessage(_message.toArray(), uuid);
                 });
             }

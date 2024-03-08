@@ -10,7 +10,7 @@ class Message {
      * @property {string|null} message
      */
 
-    constructor(){
+    constructor() {
         this.serverId = 1;
         this.serverName = "[No Server]";
         this.serverIcon = null;
@@ -24,7 +24,7 @@ class Message {
      * Fill Product fields with new values
      * @param {MessageFields} newFields - Object containing new values for Category fields
      */
-    fill(newFields) {
+    fill (newFields) {
         for (let field in newFields) {
             if (this.hasOwnProperty(field) && newFields.hasOwnProperty(field)) {
                 if (this[field] !== 'undefined') {
@@ -36,12 +36,12 @@ class Message {
         return this.toArray();
     }
 
-    toArray(){
+    toArray() {
         return {
-            serverId : this.serverId,
-            serverName : this.serverName,
-            serverIcon : this.serverIcon,
-            authorId : this.authorId,
+            serverId: this.serverId,
+            serverName: this.serverName,
+            serverIcon: this.serverIcon,
+            authorId: this.authorId,
             authorIcon: this.authorIcon,
             authorName: this.authorName,
             message: this.message

@@ -16,18 +16,19 @@ module.exports = {
 	async execute(interaction) {
         var channel = interaction.options.getChannel("channel");
 
-        interaction.client.database.search("xan.guilds" , {
-            serverId : interaction.guild.id
-        } , async (data) => {
+        interaction.client.database.search("xan.guilds", {
+            serverId: interaction.guild.id
+        }, async (data) => {
+            console.log(data);
             if(data == null){
-                interaction.client.database.insert("xan.guilds" , {
-                    serverId : interaction.guild.id,
-                    channelId : channel.id,
+                interaction.client.database.insert("xan.guilds", {
+                    serverId: interaction.guild.id,
+                    channelId: channel.id,
                     client: "discord"
                 }, async (c) => {
                     await interaction.reply(`Saved Channel as #${channel.name} in Database as Discord Client`);
                 })
-            }else{
+            } else {
                 await interaction.reply(`Guild is already saved into Database`);
             }
         });

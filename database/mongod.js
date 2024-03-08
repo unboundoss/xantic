@@ -10,22 +10,22 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
 
     var call_data = {
         createStore: async (name, callback) => {
-            db.createCollection(name).then(() => {
-                callback(true);
+            db.createCollection(name).then(async () => {
+                await callback(true);
             }).catch(() => {
-                callback(false);
+                await callback(false);
             })
         },
 
-        list: async (table , data, callback) => {
+        list: async (table, data, callback) => {
             var collection = db.collection(table);
 
             var found_data = await collection.find(data).toArray();
 
-            callback(found_data);
+            await callback(found_data);
         },
 
-        insert: async (table, data,callback) => {
+        insert: async (table, data, callback) => {
             var uuid = require('node:crypto').randomUUID();
 
             var collection = db.collection(table);
@@ -35,26 +35,26 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
                 ...data
             })
 
-            callback(uuid)
+            await callback(uuid)
         },
 
-        delete: async (table, uuid , callback) => {
+        delete: async (table, uuid, callback) => {
             var collection = db.collection(table);
 
             collection.deleteOne({ uuid: uuid });
 
-            callback(true);
+            await callback(true);
         },
 
-        search: async (table, data , callback) => {
+        search: async (table, data, callback) => {
             var collection = db.collection(table);
 
             var found_data = await collection.findOne(data);
 
-            callback(found_data);
+            await callback(found_data);
         },
 
-        edit: async (table, uuid, data , callback) => {
+        edit: async (table, uuid, data, callback) => {
             var collection = db.collection(table);
 
             collection.updateOne({
@@ -64,15 +64,15 @@ module.exports.initMongoDBInstance = async (client,config,callback) => {
                     uuid: uuid,
                     ...data
                 }
-            })
+            });
 
-            callback(true);
+            await callback(true);
         },
 
         build: async () => {
             var tables = require("./collection_tables.json");
             for(var table of tables){
-                call_data.createStore(table , (state) => {});
+                call_data.createStore(table, (state) => {});
             }
         }
     };

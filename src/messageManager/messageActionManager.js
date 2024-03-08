@@ -13,11 +13,11 @@ const actionMessageManager = async (
 ) => {
     var d_data  = {
         find_uuid: (messageId, authorId , cb) => {
-            database.search("xan.messageDelivery" , { messageId: messageId } , (dataUid) => {
-                database.search("xan.messages" , { uuid: dataUid.link } , (data) => {
-                    if(data.authorId.toString() == authorId.toString()){
+            database.search("xan.messageDelivery", { messageId }, (dataUid) => {
+                database.search("xan.messages", { uuid: dataUid.link }, (data) => {
+                    if (data.authorId.toString() == authorId.toString()) {
                         cb(dataUid.link);
-                    }else{
+                    } else {
                         cb(null)
                     }
                 })
@@ -27,7 +27,7 @@ const actionMessageManager = async (
         delete: (uuid) => {
             database.list("xan.messageDelivery", {
                 link: uuid
-            } , (data) => {
+            }, (data) => {
                 for(var message of data) {
                     discord.channels.fetch(message['channelId']).then((channel) => {
                         channel.messages.delete(message['messageId']).catch(e => {

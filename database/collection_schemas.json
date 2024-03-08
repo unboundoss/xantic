@@ -1,0 +1,59 @@
+{
+  "xan.guilds": {
+    "uuid": "text",
+    "serverId": "text",
+    "channelId": "text",
+    "networks": "text",
+    "client": "text"
+  },
+
+  "xan.messages": {
+    "uuid": "text",
+    "authorName": "text",
+    "authorId": "text",
+    "authorIcon": "text",
+    "serverIcon": "text",
+    "channelId": "text",
+    "message": "text"
+  },
+
+  "xan.userBans": {
+    "uuid": "text",
+    "userId": "text",
+    "mod": "text",
+    "reason": "text"
+  },
+
+  "xan.messageDelivery": {
+    "uuid": "text",
+    "channelId": "text",
+    "messageId": "text",
+    "client": "text",
+    "link": "text"
+  },
+
+  "xan.serverBans": {
+    "uuid": "text",
+    "serverId": "text",
+    "mod": "text",
+    "reason": "text"
+  },
+
+  "xan.userPrefs": {
+    "uuid": "text",
+    "userId": "text",
+    "prefs": "text"
+  },
+
+  "xan.serverPrefs": {
+    "uuid": "text",
+    "serverId": "text",
+    "prefs": "text"
+  },
+
+  "xan.networks": {
+    "uuid": "text",
+    "networkId": "text",
+    "address": "text"
+  }
+}

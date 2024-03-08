@@ -128,3 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Cx-specific
+package-lock.json
+db.sql
+db.sql-journal

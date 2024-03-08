@@ -8,7 +8,7 @@ module.exports = {
     discord_client_secret: process.env['discord_client_secret'] || "",
 
     // Database Configurations
-    // Possible Options ["mongod" , "mysqld"]
+    // Possible Options ["mongod", "mysqld", "sqlite"]
     database_adapter: "mongod",
     // If using MongoDB
     database_uri: process.env['database_uri'] || "",
@@ -17,5 +17,7 @@ module.exports = {
     database_host: "localhost",
     database_user: "root",
     database_password: process.env['database_password'] || "",
-    database_engine: "InnoDB"
+    database_engine: "InnoDB",
+    // If using SQLite3
+    database_file: process.env["DATABASE_FILE"] || ""
 }
